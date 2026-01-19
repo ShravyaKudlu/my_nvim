@@ -1,1 +1,1 @@
-return 'catppuccin-mocha'
+return 'base16-dracula'

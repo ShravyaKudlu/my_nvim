@@ -21,16 +21,26 @@ vim.api.nvim_create_autocmd("CursorHold", {
   end,
 })
 
--- Save the colorscheme whenever it changes
+-- Save the colorscheme and strip italics whenever it changes
 vim.api.nvim_create_autocmd("ColorScheme", {
   callback = function()
     local scheme = vim.g.colors_name
     if scheme then
+      -- 1. Your existing Save logic
       local path = vim.fn.stdpath("config") .. "/lua/config/theme_cache.lua"
       local file = io.open(path, "w")
       if file then
         file:write("return '" .. scheme .. "'")
         file:close()
+      end
+
+      -- 2. New Strip Italics logic
+      local hl_groups = vim.api.nvim_get_hl(0, {})
+      for name, hl in pairs(hl_groups) do
+        if hl.italic then
+          -- Preserve everything (like bold), but force italic to false
+          vim.api.nvim_set_hl(0, name, vim.tbl_extend("force", hl, { italic = false }))
+        end
       end
     end
   end,
