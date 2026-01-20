@@ -1,1 +1,1 @@
-return 'base16-dracula'
+return 'base16-stella'
