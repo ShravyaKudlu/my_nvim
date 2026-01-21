@@ -13,35 +13,55 @@ vim.api.nvim_create_autocmd("CursorHold", {
     vim.diagnostic.open_float(nil, {
       focusable = false,
       close_events = { "CursorMoved", "CursorMovedI", "BufHidden", "InsertCharPre" },
-      border = "rounded", -- Makes the popup look much better
-      source = "always", -- Shows which LSP (pyright/vtsls) the error is from
+      border = "rounded",
+      source = "always",
       prefix = " ",
       scope = "cursor",
     })
   end,
 })
 
--- Save the colorscheme and strip italics whenever it changes
+local cache_dir = vim.fn.stdpath("config") .. "/lua/config"
+local cache_file = cache_dir .. "/theme_cache.lua"
+
 vim.api.nvim_create_autocmd("ColorScheme", {
   callback = function()
     local scheme = vim.g.colors_name
-    if scheme then
-      -- 1. Your existing Save logic
-      local path = vim.fn.stdpath("config") .. "/lua/config/theme_cache.lua"
-      local file = io.open(path, "w")
-      if file then
-        file:write("return '" .. scheme .. "'")
-        file:close()
-      end
+    if not scheme then
+      return
+    end
 
-      -- 2. New Strip Italics logic
-      local hl_groups = vim.api.nvim_get_hl(0, {})
-      for name, hl in pairs(hl_groups) do
-        if hl.italic then
-          -- Preserve everything (like bold), but force italic to false
-          vim.api.nvim_set_hl(0, name, vim.tbl_extend("force", hl, { italic = false }))
-        end
-      end
+    if vim.fn.isdirectory(cache_dir) == 0 then
+      vim.fn.mkdir(cache_dir, "p")
+    end
+    local file = io.open(cache_file, "w")
+    if file then
+      file:write("return '" .. scheme .. "'")
+      file:close()
     end
   end,
 })
+
+local function no_italic_loop()
+  local highlights = vim.api.nvim_get_hl(0, {})
+  for name, hl in pairs(highlights) do
+    if hl.italic then
+      hl.italic = false
+      vim.api.nvim_set_hl(0, name, hl)
+    end
+  end
+end
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = function()
+    vim.schedule(no_italic_loop)
+  end,
+})
+
+vim.defer_fn(function()
+  local ok, theme = pcall(dofile, cache_file)
+  if ok and type(theme) == "string" then
+    vim.cmd.colorscheme(theme)
+  end
+  no_italic_loop()
+end, 100)

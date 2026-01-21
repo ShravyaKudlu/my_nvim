@@ -1,1 +1,1 @@
-return 'base16-stella'
+return 'base16-irblack'
