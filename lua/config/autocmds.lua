@@ -65,30 +65,3 @@ vim.defer_fn(function()
   end
   no_italic_loop()
 end, 100)
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "python",
-  callback = function()
-    -- Set foldmethod to manual so we can define custom ranges
-    vim.opt_local.foldmethod = "manual"
-
-    -- Find the start and end markers
-    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-    local start_lnum, end_lnum = nil, nil
-
-    for i, line in ipairs(lines) do
-      if line:find("@leet imports start") then
-        start_lnum = i
-      elseif line:find("@leet imports end") then
-        end_lnum = i
-        break
-      end
-    end
-
-    -- If both markers exist, create the fold and close it
-    if start_lnum and end_lnum then
-      vim.cmd(string.format("%d,%dfold", start_lnum, end_lnum))
-      vim.cmd("normal! zM") -- Close all folds by default
-    end
-  end,
-})
