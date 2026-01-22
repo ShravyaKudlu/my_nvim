@@ -14,10 +14,16 @@ return {
   },
   keys = {
     { "<leader>gxs", "<cmd>Git<cr>", desc = "Fugitive Status" },
-    { "<leader>gxv", "<cmd>Gvdiffsplit!<cr>", desc = "Vertical 3-way Diff" },
+    { "<leader>gxd", "<cmd>Gvdiffsplit!<cr>", desc = "Vertical 3-way Diff" },
     { "<leader>gxh", "<cmd>diffget //2<cr>", desc = "Conflict: Keep Left (Target)" },
     { "<leader>gxl", "<cmd>diffget //3<cr>", desc = "Conflict: Keep Right (Merge)" },
+    { "[x", "<cmd>normal! [c<cr>", desc = "Previous Conflict" },
+    { "]x", "<cmd>normal! ]c<cr>", desc = "Next Conflict" },
+    { "[X", "<cmd>normal! [c<cr>", desc = "Start of Diff" },
+    { "]X", "<cmd>normal! ]c<cr>k", desc = "End of Diff" },
+    { "[z", "[n", desc = "Prev Conflict Marker", remap = true },
+    { "]z", "]n", desc = "Next Conflict Marker", remap = true },
     { "<leader>gxa", "<cmd>Gwrite<cr>", desc = "Stage (Add) Current File" },
-    { "<leader>gxr", "<cmd>Gread<cr>", desc = "Reset (Read) Current File" },
+    { "<leader>gxe", "<cmd>Gedit<cr><cmd>only<cr>", desc = "Exit Diff (Close Splits)" },
   },
 }
