@@ -17,8 +17,6 @@ return {
     { "<leader>gxv", "<cmd>Gvdiffsplit!<cr>", desc = "Vertical 3-way Diff" },
     { "<leader>gxh", "<cmd>diffget //2<cr>", desc = "Conflict: Keep Left (Target)" },
     { "<leader>gxl", "<cmd>diffget //3<cr>", desc = "Conflict: Keep Right (Merge)" },
-    { "[c", "<cmd>normal! [c<cr>", desc = "Previous Conflict" },
-    { "]c", "<cmd>normal! ]c<cr>", desc = "Next Conflict" },
     { "<leader>gxa", "<cmd>Gwrite<cr>", desc = "Stage (Add) Current File" },
     { "<leader>gxr", "<cmd>Gread<cr>", desc = "Reset (Read) Current File" },
   },
