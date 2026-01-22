@@ -2,6 +2,7 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+local wk = require("which-key")
 vim.keymap.set("n", "Y", "y$", { desc = "yank until the end of the line" })
 vim.keymap.set("i", "<C-z>", "<C-o>u", { desc = "Undo in insert mode" })
 vim.keymap.set("i", "<C-y>", "<C-o><C-r>", { desc = "Redo in insert mode" })
@@ -31,8 +32,21 @@ vim.keymap.del("n", "gra")
 vim.keymap.del("n", "grr")
 vim.keymap.del("n", "gri")
 vim.keymap.set("n", "<leader>cd", "<cmd>FzfLua lsp_document_diagnostics<CR>", { desc = "Fzf Diagnostics" })
-local wk = require("which-key")
 
 wk.add({
   { "<leader>gx", group = "Fugitive/Conflicts" },
 })
+
+vim.keymap.set("n", "<leader>gd", function()
+  Snacks.picker.git_diff()
+end, {
+  desc = "Git difference",
+})
+
+vim.keymap.set("n", "<leader>gl", function()
+  local path = Snacks.git.get_root() or vim.fn.getcwd()
+  Snacks.lazygit.open({
+    cwd = path,
+    args = { "log", "--screen-mode", "full" },
+  })
+end, { desc = "Git Log (LazyGit)" })
