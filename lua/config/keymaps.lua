@@ -50,3 +50,42 @@ vim.keymap.set("n", "<leader>gl", function()
     args = { "log", "--screen-mode", "full" },
   })
 end, { desc = "Git Log (LazyGit)" })
+
+vim.keymap.set("n", "<leader>gb", function()
+  Snacks.picker.git_branches()
+end, { desc = "Git Branches" })
+
+vim.keymap.set("n", "<leader>gs", function()
+  Snacks.picker.git_status()
+end, { desc = "Git Status" })
+
+vim.keymap.set("n", "<leader>gS", function()
+  Snacks.picker.git_stash()
+end, { desc = "Git Stash" })
+vim.keymap.set("n", "<leader>gc", function()
+  Snacks.picker.git_log()
+end, { desc = "Git Log (Commits)" })
+
+vim.keymap.set("n", "<leader>gf", function()
+  Snacks.picker.git_log_file()
+end, { desc = "Git Log File" })
+
+vim.keymap.set("n", "<leader>gi", function()
+  Snacks.picker.gh_issue()
+end, { desc = "GitHub Issues (open)" })
+
+vim.keymap.set("n", "<leader>gI", function()
+  Snacks.picker.gh_issue({ state = "all" })
+end, { desc = "GitHub Issues (all)" })
+
+vim.keymap.set("n", "<leader>gp", function()
+  Snacks.picker.gh_pr()
+end, { desc = "GitHub Pull Requests (open)" })
+
+vim.keymap.set("n", "<leader>gP", function()
+  Snacks.picker.gh_pr({ state = "all" })
+end, { desc = "GitHub Pull Requests (all)" })
+
+wk.add({
+  { "<leader>z", group = "LeetCode" },
+})
