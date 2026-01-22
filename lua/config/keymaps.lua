@@ -31,3 +31,8 @@ vim.keymap.del("n", "gra")
 vim.keymap.del("n", "grr")
 vim.keymap.del("n", "gri")
 vim.keymap.set("n", "<leader>cd", "<cmd>FzfLua lsp_document_diagnostics<CR>", { desc = "Fzf Diagnostics" })
+local wk = require("which-key")
+
+wk.add({
+  { "<leader>gx", group = "Fugitive/Conflicts" },
+})
