@@ -1,1 +1,1 @@
-return 'base16-irblack'
+return 'base16-rose-pine'
