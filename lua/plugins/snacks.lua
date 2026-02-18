@@ -13,8 +13,14 @@ return {
     picker = {
       enabled = true,
       ui_select = true,
+      sources = {
+        explorer = {
+          auto_close = true,
+          jump = { close = true },
+        },
+      },
     },
-    explorer = { enabled = false },
+    explorer = { enabled = true },
 
     image = { enabled = true },
     statuscolumn = { enabled = true },

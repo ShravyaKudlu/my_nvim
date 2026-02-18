@@ -1,1 +1,1 @@
-return 'base16-rose-pine'
+return 'base16-rose-pine-moon'
