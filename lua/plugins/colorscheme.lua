@@ -9,11 +9,12 @@ local function get_saved_theme()
 end
 
 return {
-  {
-    "tinted-theming/base16-vim",
-    lazy = false,
-    priority = 1000,
-  },
+  { "neanias/everforest-nvim", lazy = false, main = "everforest" },
+  { "ellisonleao/gruvbox.nvim", lazy = false },
+  { "EdenEast/nightfox.nvim", lazy = false },
+  { "rose-pine/neovim", lazy = false },
+  { "navarasu/onedark.nvim", lazy = false },
+  { "uhs-robert/oasis.nvim", lazy = false, priority = 1000 },
   {
     "LazyVim/LazyVim",
     opts = {

@@ -1,1 +1,1 @@
-return 'base16-rose-pine-moon'
+return 'oasis-cactus'
